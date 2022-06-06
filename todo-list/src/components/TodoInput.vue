@@ -5,10 +5,20 @@
     <span class="addContainer" v-on:click="addTodo()">
       <i class="fa-solid fa-circle-plus"></i>
     </span>
+    <button id="show-modal" @click="showModal = true">Show Modal</button>
+      <!-- use the modal component, pass in the prop -->
+      <modal v-if="showModal" @close="showModal = false">
+        <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+        <h3 slot="header">custom header</h3>
+      </modal>
   </div>
 </template>
 
 <script>
+import Modal from './common/Modal.vue';
 export default {
   data:function(){
     return {
@@ -26,6 +36,9 @@ export default {
     clearInput : function(){
       this,this.newTodoItem = ""
     }
+  },
+  components:{
+    "modal":Modal
   }
 }
 </script>
