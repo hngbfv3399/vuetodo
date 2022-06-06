@@ -3,24 +3,30 @@
 
     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo()">
     <span class="addContainer" v-on:click="addTodo()">
-      <i class="fa-solid fa-circle-plus"></i>
+      <i class="closeModalBtn fa-solid fa-circle-plus"></i>
     </span>
-    <button id="show-modal" @click="showModal = true">Show Modal</button>
       <!-- use the modal component, pass in the prop -->
-      <modal v-if="showModal" @close="showModal = false">
-        <!--
-      you can use custom content here to overwrite
-      default content
-    -->
+
+      <AlertModal v-if="showModal" @close="showModal = false">
+
         <h3 slot="header">
             경고!
+            <span @click="showModal = false">
+              <i class="fa-solid fa-circle-minus"></i>
+            </span>
         </h3>
-      </modal>
+        <h3 slot="body">
+          무언가를 입력하세요
+        </h3>
+      
+
+
+      </AlertModal>
   </div>
 </template>
 
 <script>
-import Modal from './common/Modal.vue';
+import AlertModal from './common/AlertModal.vue';
 export default {
   data:function(){
     return {
@@ -43,7 +49,7 @@ export default {
     }
   },
   components:{
-    "modal":Modal
+    "AlertModal":AlertModal
   }
 }
 </script>
@@ -61,6 +67,7 @@ input:focus{
 .inputBox input{
   border-style: none;
   font-size: 0.9rem;
+  width : 370px
 }
 .addContainer {
   float : right;
@@ -72,5 +79,9 @@ input:focus{
 .addBtn {
   color : white;
   vertical-align: middle;
+}
+.closeModalBtn{
+  color : #42b983;
+
 }
 </style>
