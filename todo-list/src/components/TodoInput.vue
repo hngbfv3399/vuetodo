@@ -12,7 +12,9 @@
       you can use custom content here to overwrite
       default content
     -->
-        <h3 slot="header">custom header</h3>
+        <h3 slot="header">
+            경고!
+        </h3>
       </modal>
   </div>
 </template>
@@ -22,7 +24,8 @@ import Modal from './common/Modal.vue';
 export default {
   data:function(){
     return {
-      newTodoItem : ""
+      newTodoItem : "",
+      showModal : false
     }
   },
   methods:{
@@ -30,6 +33,8 @@ export default {
       if (this.newTodoItem !== '') {
         this.$emit('addTodoItem',this.newTodoItem)
         this.clearInput();
+      }else{
+        this.showModal = !this.showModal;
       }
      
     },
